@@ -21,3 +21,15 @@ C:\Estudo\AspNetCore\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\Lista
 C:\Estudo\AspNetCore\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.dll
 C:\Estudo\AspNetCore\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.pdb
 C:\Estudo\AspNetCore\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\Repositorio\livros.csv
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\ListaLeitura.App.dll
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\Repositorio\livros.csv
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\ListaLeitura.App.deps.json
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\ListaLeitura.App.runtimeconfig.json
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\ListaLeitura.App.runtimeconfig.dev.json
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\bin\Debug\netcoreapp2.0\ListaLeitura.App.pdb
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.csprojResolveAssemblyReference.cache
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.csproj.CoreCompileInputs.cache
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.AssemblyInfoInputs.cache
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.AssemblyInfo.cs
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.dll
+G:\Arquivos\Estudo\TI\Web\AspNetCore\Fontes\ListaLeitura\ListaLeitura.App\obj\Debug\netcoreapp2.0\ListaLeitura.App.pdb
