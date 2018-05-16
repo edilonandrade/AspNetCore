@@ -1,6 +1,7 @@
 ﻿using Ler.ListaLeitura.App.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Ler.ListaLeitura.App
@@ -17,8 +18,29 @@ namespace Ler.ListaLeitura.App
             do tipo Task(usado para trabalhar com paralelismo) e aceita como argumento de entrada um objeto 
             do tipo HttpContext. */
 
-           app.Run(LivrosParaLer);
+           app.Run(Roteamento);
         }
+
+        public Task Roteamento(HttpContext context)
+        {
+            var _repo = new LivroRepositorioCSV();
+
+            var caminhosAtendidos = new Dictionary<string, RequestDelegate> {
+                { "/Livros/ParaLer", LivrosParaLer},
+                { "/Livros/Lendo", LivrosLendo },
+                {"/Livros/Lidos", LivrosLidos }
+            };
+
+            if (caminhosAtendidos.ContainsKey(context.Request.Path)) {
+                var metodo = caminhosAtendidos[context.Request.Path];
+
+                return metodo.Invoke(context);
+            }
+
+            context.Response.StatusCode = 404;
+            return context.Response.WriteAsync("Caminho inexistente.");            
+        }
+
         /*
          No ASP.NET Core toda informação referente às requisições está representada na classe HttpContext
          */
@@ -29,6 +51,18 @@ namespace Ler.ListaLeitura.App
              * usamos o método WriteAsync() na propriedade Response             
               */
             return context.Response.WriteAsync(_repo.ParaLer.ToString());            
+        }
+
+        public Task LivrosLendo(HttpContext context)
+        {
+            var _repo = new LivroRepositorioCSV();            
+            return context.Response.WriteAsync(_repo.Lendo.ToString());
+        }
+
+        public Task LivrosLidos(HttpContext context)
+        {
+            var _repo = new LivroRepositorioCSV();            
+            return context.Response.WriteAsync(_repo.Lidos.ToString());
         }
     }
 }
