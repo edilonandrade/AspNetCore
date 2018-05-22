@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,6 +44,10 @@ namespace Ler.ListaLeitura.App
             //Na documentação sobre o roteamento no Asp.NET também temos a possibilidade de adicionar restrições às rotas mapeadas. São as chamadas Route Constraints. As restrições limitam o mapeamento e fazem com que o ASP.NET só execute determinado request delegate se a restrição for atendida.
             builder.MapRoute("Livros/Detalhes/{id:int}", ExibeDetalhes);
 
+            builder.MapRoute("Cadastro/NovoLivro", ExibeFormulario);
+
+            builder.MapRoute("Cadastro/Incluir", ProcessarFormularo);
+
             //Para finalizar eu crio a coleção de rotas usando o builder, que era o nosso dicionário anterior, através do método Build(), e uso essa coleção na minha aplicação. Também não preciso mais usar o método Run() para passar o delegate AtendeRequisicao, porque isso tudo está na coleção de rotas.
             var rotas = builder.Build();
 
@@ -53,6 +58,36 @@ namespace Ler.ListaLeitura.App
             do tipo HttpContext. */
 
             //app.Run(Roteamento);
+        }
+
+        public Task ProcessarFormularo(HttpContext context)
+        {
+            var livro = new Livro()
+            {
+                //Como a query string faz parte da requisição, é lá que vamos procurar uma propriedade chamada Query, que é do tipo IQueryCollection. Essa coleção permite que você a indexe pela chave usando os colchetes
+                Titulo = context.Request.Form["titulo"].First(),
+                Autor = context.Request.Form["autor"].First()
+            };
+
+            var repo = new LivroRepositorioCSV();
+            repo.Incluir(livro);
+
+            return context.Response.WriteAsync("O livro foi adicionado com sucesso.");
+        }
+
+        public Task ExibeFormulario(HttpContext context)
+        {
+            var html = CarregaArquivoHTML("formulario");
+            return context.Response.WriteAsync(html);            
+        }
+
+        private string CarregaArquivoHTML(string nomeArquivo)
+        {
+            var nomeCompletoArquivo = $"HTML/{nomeArquivo}.html";
+            using(var arquivo = File.OpenText(nomeCompletoArquivo))
+            {
+                return arquivo.ReadToEnd();
+            }
         }
 
         public Task ExibeDetalhes(HttpContext context)
@@ -104,10 +139,18 @@ namespace Ler.ListaLeitura.App
         public Task LivrosParaLer(HttpContext context)
         {            
             var _repo = new LivroRepositorioCSV();
+            var conteudoArquivo = CarregaArquivoHTML("para-ler");
+
+            foreach(var livro in _repo.ParaLer.Livros)
+            {
+                conteudoArquivo = conteudoArquivo.Replace("#NOVO-ITEM#", $"<li>{livro.Titulo} - {livro.Autor}</li>#NOVO-ITEM#");
+            }
+            conteudoArquivo = conteudoArquivo.Replace("#NOVO-ITEM#", "");
+
             /* para escrever uma resposta para a requisição que chegar ao servidor, 
              * usamos o método WriteAsync() na propriedade Response             
               */
-            return context.Response.WriteAsync(_repo.ParaLer.ToString());            
+            return context.Response.WriteAsync(conteudoArquivo);            
         }
 
         public Task LivrosLendo(HttpContext context)
